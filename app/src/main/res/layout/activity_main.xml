@@ -47,6 +47,21 @@
             android:orientation="vertical"
             android:padding="30dp">
 
+        <Button
+            android:id="@+id/btn_cbt_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Classic Bluetooth" />
+
+        <Button
+            android:id="@+id/btn_ble_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="BLE" />
+            
+        </LinearLayout>
+
         </RelativeLayout>
 
 
