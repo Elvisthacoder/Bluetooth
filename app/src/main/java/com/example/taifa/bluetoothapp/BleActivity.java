@@ -5,8 +5,10 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -117,7 +119,7 @@ public class BleActivity extends AppCompatActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         mBLEController = BluetoothLEController.getInstance().build(this);
         mBLEController.setBluetoothListener(mBluetoothLEListener);
 
@@ -140,13 +142,47 @@ public class BleActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mList.clear();
                 mFoundAdapter.notifyDataSetChanged();
-                if (mBLEController.startScan()){
+                if (mBLEController.startScan()) {
                     Toast.makeText(BleActivity.this, "Scanning!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBLEController.disconnect();
+            }
+        });
+        btnReconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBLEController.reConnect();
+            }
+        });
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = etSendContent.getText().toString();
+                if (!TextUtils.isEmpty(msg)) {
+                    mBLEController.write(msg.getBytes());
+                }
+            }
+        });
+        lvDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemStr = mList.get(position);
+                mBLEController.connect(itemStr.substring(itemStr.length() - 17));
+            }
+        });
 
-        
+        if (!mBLEController.isSupportBLE()) {
+            Toast.makeText(BleActivity.this, "Unsupport BLE!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
+
+
 
 
 }
