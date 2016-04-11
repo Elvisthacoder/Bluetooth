@@ -1,5 +1,6 @@
 package com.example.taifa.bluetoothapp;
 
+import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,6 +66,15 @@ public class BleActivity extends AppCompatActivity {
         @Override
         public void onActionStateChanged(int preState, int state) {
             Log.d(TAG, "onActionStateChanged: " + state);
+        }
+
+        @Override
+        public void onActionDiscoveryStateChanged(String discoveryState) {
+            if (discoveryState.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)) {
+                Toast.makeText(BleActivity.this, "scanning!", Toast.LENGTH_SHORT).show();
+            } else if (discoveryState.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
+                Toast.makeText(BleActivity.this, "scan finished!", Toast.LENGTH_SHORT).show();
+            }
         }
 
 
