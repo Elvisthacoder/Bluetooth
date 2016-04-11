@@ -49,4 +49,16 @@ public class BleActivity extends AppCompatActivity {
             });
         }
 
+        @Override
+        public void onDataChanged(final BluetoothGattCharacteristic characteristic) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvContent.append("Changed from " + mBLEController.getConnectedDevice().getName()
+                            + ": " + parseData(characteristic) + "\n");
+                }
+            });
+        }
+        
+
 }
