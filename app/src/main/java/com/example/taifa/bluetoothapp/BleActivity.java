@@ -82,5 +82,15 @@ public class BleActivity extends AppCompatActivity {
             Log.d(TAG, "onActionScanModeChanged:  " + scanMode);
         }
 
+        @Override
+        public void onBluetoothServiceStateChanged(final int state) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvConnState.setText("Conn state: " + Utils.transConnStateAsString(state));
+                }
+            });
+        }
+
 
 }
