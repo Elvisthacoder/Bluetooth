@@ -2,6 +2,7 @@ package com.example.taifa.bluetoothapp;
 
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +60,11 @@ public class BleActivity extends AppCompatActivity {
                 }
             });
         }
-        
+
+        @Override
+        public void onActionStateChanged(int preState, int state) {
+            Log.d(TAG, "onActionStateChanged: " + state);
+        }
+
 
 }
