@@ -1,6 +1,7 @@
 package com.example.taifa.bluetoothapp;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -91,6 +92,18 @@ public class BleActivity extends AppCompatActivity {
                 }
             });
         }
+
+        @Override
+        public void onActionDeviceFound(final BluetoothDevice device, short rssi) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mList.add(device.getName() + "@" + device.getAddress());
+                    mFoundAdapter.notifyDataSetChanged();
+                }
+            });
+        }
+    };
 
 
 }
