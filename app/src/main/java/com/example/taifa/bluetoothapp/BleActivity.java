@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -131,6 +132,21 @@ public class BleActivity extends AppCompatActivity {
         tvConnState = (TextView) findViewById(R.id.tv_ble_conn_state);
         tvContent = (TextView) findViewById(R.id.tv_ble_chat_content);
         etSendContent = (EditText) findViewById(R.id.et_ble_send_content);
+
+        lvDevices.setAdapter(mFoundAdapter);
+
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mList.clear();
+                mFoundAdapter.notifyDataSetChanged();
+                if (mBLEController.startScan()){
+                    Toast.makeText(BleActivity.this, "Scanning!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        
 
 
 }
