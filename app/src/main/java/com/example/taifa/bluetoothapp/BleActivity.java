@@ -38,5 +38,15 @@ public class BleActivity extends AppCompatActivity {
                 }
             });
         }
-        
+
+        @Override
+        public void onWriteData(final BluetoothGattCharacteristic characteristic) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvContent.append("Me" + ": " + parseData(characteristic) + "\n");
+                }
+            });
+        }
+
 }
