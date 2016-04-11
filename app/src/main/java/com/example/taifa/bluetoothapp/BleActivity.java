@@ -77,5 +77,10 @@ public class BleActivity extends AppCompatActivity {
             }
         }
 
+        @Override
+        public void onActionScanModeChanged(int preScanMode, int scanMode) {
+            Log.d(TAG, "onActionScanModeChanged:  " + scanMode);
+        }
+
 
 }
