@@ -1,5 +1,6 @@
 package com.example.taifa.bluetoothapp;
 
+import android.bluetooth.BluetoothGattCharacteristic;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -23,4 +24,19 @@ public class BleActivity extends AppCompatActivity {
     private Button btnScan, btnDisconnect, btnReconnect, btnSend;
     private TextView tvConnState, tvContent;
     private EditText etSendContent;
+
+    private static final String TAG = "LMBluetoothSdk";
+
+    private BluetoothLEListener mBluetoothLEListener = new BluetoothLEListener() {
+        @Override
+        public void onReadData(final BluetoothGattCharacteristic characteristic) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvContent.append("Read from " + mBLEController.getConnectedDevice().getName()
+                            + ": " + parseData(characteristic) + "\n");
+                }
+            });
+        }
+        
 }
