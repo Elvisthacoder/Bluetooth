@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -113,6 +115,22 @@ public class BleActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("BLE Sample");
         init();
     }
+
+    private void init(){
+        mBLEController = BluetoothLEController.getInstance().build(this);
+        mBLEController.setBluetoothListener(mBluetoothLEListener);
+
+        mList = new ArrayList<String>();
+        mFoundAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mList);
+
+        lvDevices = (ListView) findViewById(R.id.lv_ble_devices);
+        btnScan = (Button) findViewById(R.id.btn_ble_scan);
+        btnDisconnect = (Button) findViewById(R.id.btn_ble_disconnect);
+        btnReconnect = (Button) findViewById(R.id.btn_ble_reconnect);
+        btnSend = (Button) findViewById(R.id.btn_ble_send);
+        tvConnState = (TextView) findViewById(R.id.tv_ble_conn_state);
+        tvContent = (TextView) findViewById(R.id.tv_ble_chat_content);
+        etSendContent = (EditText) findViewById(R.id.et_ble_send_content);
 
 
 }
