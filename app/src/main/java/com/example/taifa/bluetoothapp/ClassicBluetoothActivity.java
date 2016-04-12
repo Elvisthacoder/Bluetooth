@@ -166,4 +166,16 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 4){
+            if (mBluetoothController != null){
+                mBluetoothController.release();
+            }
+            mBluetoothController.build(this);
+            mBluetoothController.setBluetoothListener(mListener);
+        }
+    }
+
 
