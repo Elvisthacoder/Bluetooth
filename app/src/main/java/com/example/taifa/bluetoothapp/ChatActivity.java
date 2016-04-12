@@ -18,5 +18,25 @@ import co.lujun.lmbluetoothsdk.BluetoothController;
 import co.lujun.lmbluetoothsdk.base.BluetoothListener;
 import co.lujun.lmbluetoothsdk.base.State;
 
-public class ChatActivity {
-}
+//public class ChatActivity {
+//}
+
+public class ChatActivity extends Activity {
+    private BluetoothController mBluetoothController;
+
+    private Button btnDisconnect, btnSend;
+    private EditText etSend;
+    private TextView tvConnectState, tvContent, tvDeviceName, tvDeviceMac;
+
+    private int mConnectState;
+    private String mMacAddress = "", mDeviceName = "";
+
+    private static final String TAG = "LMBluetoothSdk";
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.chat_main);
+
+        init();
+    }
