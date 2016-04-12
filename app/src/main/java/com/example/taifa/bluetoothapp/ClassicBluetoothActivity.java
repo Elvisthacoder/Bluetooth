@@ -177,5 +177,10 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
             mBluetoothController.setBluetoothListener(mListener);
         }
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mBluetoothController.release();
+    }
+}
 
