@@ -3,8 +3,9 @@ package com.example.taifa.bluetoothapp;
 /**
  * Created by taifa on 4/12/16.
  */
-//public class Utils {
-//}
+import android.bluetooth.BluetoothAdapter;
+import com.example.taifa.lmbluetoothsdk.base.State;
+
 
 public static String transConnStateAsString(int state){
         String result;
@@ -26,3 +27,17 @@ public static String transConnStateAsString(int state){
         }
         return result;
         }
+public static String transBtStateAsString(int state){
+        String result = "UNKNOWN";
+        if (state == BluetoothAdapter.STATE_TURNING_ON) {
+        result = "TURNING_ON";
+        } else if (state == BluetoothAdapter.STATE_ON) {
+        result = "ON";
+        } else if (state == BluetoothAdapter.STATE_TURNING_OFF) {
+        result = "TURNING_OFF";
+        }else if (state == BluetoothAdapter.STATE_OFF) {
+        result = "OFF";
+        }
+        return result;
+        }
+
