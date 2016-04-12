@@ -63,4 +63,8 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
             mList.add(device.getName() + "@" + device.getAddress());
             mFoundAdapter.notifyDataSetChanged();
         }
+        @Override
+        public void onReadData(final BluetoothDevice device, final byte[] data) {
+        }
+    };
 
