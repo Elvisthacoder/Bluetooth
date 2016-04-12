@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -84,4 +87,24 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
         tvBTState.setText("Bluetooth state: "
                 + Utils.transBtStateAsString(mBluetoothController.getBluetoothState()));
     }
+    private void init(){
+        mList = new ArrayList<String>();
+        mFoundAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mList);
+
+        btnScanAvaliabe = (Button) findViewById(R.id.btn_scan_avaliable);
+        btnScan = (Button) findViewById(R.id.btn_scan);
+        btnOpen = (Button) findViewById(R.id.btn_open_bt);
+        btnStartServer = (Button) findViewById(R.id.btn_start_as_server);
+        tvBTState = (TextView) findViewById(R.id.tv_bt_state);
+        lvDevices = (ListView) findViewById(R.id.lv_devices);
+
+        lvDevices.setAdapter(mFoundAdapter);
+        initBT();
+
+        btnScanAvaliabe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothController.setDiscoverable(60);
+            }
+        });
 
