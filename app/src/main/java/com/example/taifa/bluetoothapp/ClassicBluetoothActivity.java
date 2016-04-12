@@ -1,9 +1,13 @@
 package com.example.taifa.bluetoothapp;
 
+import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -107,4 +111,16 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
                 mBluetoothController.setDiscoverable(60);
             }
         });
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // for Android 6.0+, request dangerous permission
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    int permission = ActivityCompat.checkSelfPermission(
+                            ClassicBluetoothActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+                    if (permission != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(ClassicBluetoothActivity.this,
+                                new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
+                    }
+                }
 
