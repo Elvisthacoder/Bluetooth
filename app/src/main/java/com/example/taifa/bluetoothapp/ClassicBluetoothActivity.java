@@ -145,4 +145,12 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
                 }
             }
         });
+        btnStartServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mBluetoothController.startAsServer();
+                Toast.makeText(ClassicBluetoothActivity.this, "Start as a server!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
