@@ -1,6 +1,7 @@
 package com.example.taifa.bluetoothapp;
 
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -56,5 +57,10 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
                 Intent intent = new Intent(ClassicBluetoothActivity.this, ChatActivity.class);
                 startActivityForResult(intent, 4);
             }
+        }
+        @Override
+        public void onActionDeviceFound(BluetoothDevice device, short rssi) {
+            mList.add(device.getName() + "@" + device.getAddress());
+            mFoundAdapter.notifyDataSetChanged();
         }
 
