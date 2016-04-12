@@ -120,4 +120,18 @@ public class ChatActivity extends Activity {
                 }
                 finish();
             }
-      
+
+            if (!TextUtils.isEmpty(mMacAddress)) {
+                mBluetoothController.connect(mMacAddress);
+            }else {
+                if (mBluetoothController.getConnectedDevice() == null){
+                    return;
+                }
+                mDeviceName = mBluetoothController.getConnectedDevice().getName();
+                mMacAddress = mBluetoothController.getConnectedDevice().getAddress();
+                tvDeviceName.setText("Device: " + mDeviceName);
+                tvDeviceMac.setText("MAC address: " + mMacAddress);
+            }
+        }
+    }
+
