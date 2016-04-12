@@ -3,6 +3,7 @@ package com.example.taifa.bluetoothapp;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.BaseAdapter;
@@ -67,4 +68,11 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
         public void onReadData(final BluetoothDevice device, final byte[] data) {
         }
     };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_classicbt);
+        getSupportActionBar().setTitle("Classic Bluetooth Sample");
+        init();
+    }
 
