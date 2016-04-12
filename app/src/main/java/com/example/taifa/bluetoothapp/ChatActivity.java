@@ -69,3 +69,19 @@ public class ChatActivity extends Activity {
                     }
                 });
             }
+
+            @Override
+            public void onActionDeviceFound(BluetoothDevice device, short rssi) {}
+
+            @Override
+            public void onReadData(final BluetoothDevice device, final byte[] data) {
+                // If you want to update UI, please run this on UI thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String deviceName = device == null ? "" : device.getName();
+                        tvContent.append(deviceName + ": " + new String(data) + "\n");
+                    }
+                });
+            }
+        });
