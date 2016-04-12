@@ -85,3 +85,39 @@ public class ChatActivity extends Activity {
                 });
             }
         });
+
+        btnSend = (Button) findViewById(R.id.btn_send);
+        btnDisconnect = (Button) findViewById(R.id.btn_disconnect);
+        tvConnectState = (TextView) findViewById(R.id.tv_connect_state);
+        etSend = (EditText) findViewById(R.id.et_send_content);
+        tvContent = (TextView) findViewById(R.id.tv_chat_content);
+        tvDeviceName = (TextView) findViewById(R.id.tv_device_name);
+        tvDeviceMac = (TextView) findViewById(R.id.tv_device_mac);
+
+        tvDeviceName.setText("Device: " + mDeviceName);
+        tvDeviceMac.setText("MAC address: " + mMacAddress);
+        tvConnectState.setText("Connection state: "
+                + Utils.transConnStateAsString(mBluetoothController.getConnectionState()));
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = etSend.getText().toString();
+                if (TextUtils.isEmpty(msg)) {
+                    return;
+                }
+                mBluetoothController.write(msg.getBytes());
+                tvContent.append("Me: " + msg + "\n");
+                etSend.setText("");
+            }
+        });
+
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mConnectState == State.STATE_CONNECTED) {
+                    mBluetoothController.disconnect();
+                }
+                finish();
+            }
+      
