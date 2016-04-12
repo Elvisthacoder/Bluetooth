@@ -2,6 +2,7 @@ package com.example.taifa.bluetoothapp;
 
 import android.bluetooth.BluetoothAdapter;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -42,5 +43,9 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
             } else if (discoveryState.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
                 Toast.makeText(ClassicBluetoothActivity.this, "scan finished!", Toast.LENGTH_SHORT).show();
             }
+        }
+        @Override
+        public void onActionScanModeChanged(int preScanMode, int scanMode) {
+            Log.d(TAG, "preScanMode:" + preScanMode + ", scanMode:" + scanMode);
         }
 
