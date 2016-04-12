@@ -182,6 +182,12 @@ public class BleActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mBLEController.release();
+    }
+
 
 
 
