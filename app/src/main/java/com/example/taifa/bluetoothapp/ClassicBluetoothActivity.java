@@ -1,10 +1,12 @@
 package com.example.taifa.bluetoothapp;
 
+import android.bluetooth.BluetoothAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -32,5 +34,13 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
         @Override
         public void onActionStateChanged(int preState, int state) {
             tvBTState.setText("Bluetooth state: " + Utils.transBtStateAsString(state));
+        }
+        @Override
+        public void onActionDiscoveryStateChanged(String discoveryState) {
+            if (discoveryState.equals(BluetoothAdapter.ACTION_DISCOVERY_STARTED)) {
+                Toast.makeText(ClassicBluetoothActivity.this, "scanning!", Toast.LENGTH_SHORT).show();
+            } else if (discoveryState.equals(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)) {
+                Toast.makeText(ClassicBluetoothActivity.this, "scan finished!", Toast.LENGTH_SHORT).show();
+            }
         }
 
