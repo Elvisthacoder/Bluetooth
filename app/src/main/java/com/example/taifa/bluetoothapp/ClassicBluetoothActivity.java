@@ -123,4 +123,15 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
                                 new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
                     }
                 }
+                mList.clear();
+                mFoundAdapter.notifyDataSetChanged();
+                if(!mBluetoothController.startScan()){
+                    Toast.makeText(ClassicBluetoothActivity.this, "Start scan failed!",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(ClassicBluetoothActivity.this, "Start scan success!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
