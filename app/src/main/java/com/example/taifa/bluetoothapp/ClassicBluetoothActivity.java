@@ -134,4 +134,15 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
                 }
             }
         });
+        btnOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!mBluetoothController.isEnabled()) {
+                    mBluetoothController.openBluetooth();
+                } else {
+                    Toast.makeText(ClassicBluetoothActivity.this, "Bluetooth has opened!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
