@@ -40,3 +40,32 @@ public class ChatActivity extends Activity {
 
         init();
     }
+
+    private void init(){
+        mMacAddress = getIntent().getStringExtra("mac");
+        mDeviceName = getIntent().getStringExtra("name");
+
+        mBluetoothController = BluetoothController.getInstance();
+        mBluetoothController.setBluetoothListener(new BluetoothListener() {
+            @Override
+            public void onActionStateChanged(int preState, int state) {
+                Toast.makeText(ChatActivity.this, "BT state: " + state, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onActionDiscoveryStateChanged(String discoveryState) {}
+
+            @Override
+            public void onActionScanModeChanged(int preScanMode, int scanMode) {}
+
+            @Override
+            public void onBluetoothServiceStateChanged(final int state) {
+                // If you want to update UI, please run this on UI thread
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mConnectState = state;
+                        tvConnectState.setText("Connection state: " + Utils.transConnStateAsString(state));
+                    }
+                });
+            }
