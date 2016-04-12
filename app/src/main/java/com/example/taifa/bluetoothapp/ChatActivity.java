@@ -14,9 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import co.lujun.lmbluetoothsdk.BluetoothController;
-import co.lujun.lmbluetoothsdk.base.BluetoothListener;
-import co.lujun.lmbluetoothsdk.base.State;
+import com.example.taifa.lmbluetoothsdk.BluetoothController;
+import com.example.taifa.lmbluetoothsdk.base.BluetoothListener;
+import com.example.taifa.lmbluetoothsdk.base.State;
 
 //public class ChatActivity {
 //}
