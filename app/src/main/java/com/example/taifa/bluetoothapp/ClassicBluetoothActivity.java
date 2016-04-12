@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -153,4 +154,16 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+        lvDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String itemStr = mList.get(position);
+                mMacAddress = itemStr.substring(itemStr.length() - 17);
+                Intent intent = new Intent(ClassicBluetoothActivity.this, ChatActivity.class);
+                intent.putExtra("name", itemStr.substring(0, itemStr.length() - 18));
+                intent.putExtra("mac", mMacAddress);
+                startActivityForResult(intent, 4);
+            }
+        });
+    }
 
