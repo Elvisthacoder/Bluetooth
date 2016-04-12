@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by taifa on 4/12/16.
@@ -74,5 +75,13 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
         setContentView(R.layout.activity_classicbt);
         getSupportActionBar().setTitle("Classic Bluetooth Sample");
         init();
+    }
+    private void initBT(){
+        mBluetoothController = BluetoothController.getInstance().build(this);
+        mBluetoothController.setAppUuid(UUID.fromString("fa87c0d0-afac-12de-8a39-0450200c9a66"));
+        mBluetoothController.setBluetoothListener(mListener);
+
+        tvBTState.setText("Bluetooth state: "
+                + Utils.transBtStateAsString(mBluetoothController.getBluetoothState()));
     }
 
