@@ -1,6 +1,7 @@
 package com.example.taifa.bluetoothapp;
 
 import android.bluetooth.BluetoothAdapter;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.BaseAdapter;
@@ -47,5 +48,13 @@ public class ClassicBluetoothActivity extends AppCompatActivity {
         @Override
         public void onActionScanModeChanged(int preScanMode, int scanMode) {
             Log.d(TAG, "preScanMode:" + preScanMode + ", scanMode:" + scanMode);
+        }
+        @Override
+        public void onBluetoothServiceStateChanged(int state) {
+            Log.d(TAG, "bluetooth service state:" + state);
+            if (state == State.STATE_CONNECTED) {
+                Intent intent = new Intent(ClassicBluetoothActivity.this, ChatActivity.class);
+                startActivityForResult(intent, 4);
+            }
         }
 
